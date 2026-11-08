@@ -1,0 +1,646 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Richard Atangana</title>
+<meta name="description" content="Richard Atangana, développeur full-stack et étudiant en Licence 2 informatique, option génie logiciel, à l'Université de Yaoundé. Développeur chez Nateiva.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Pacifico&display=swap">
+<style>
+/* Direction : la charte rouge et noire envoyée par Richard. Cadre rouge, pages noires,
+   cercles rouges et rouge sombre, titres ronds et gras, prénom en lettres manuscrites.
+   Un seul thème, choisi exprès. Ton : un étudiant développeur, concret et sans exagération. */
+:root {
+  --red: #E3001B;
+  --red-hot: #FF1A33;
+  --red-deep: #9B0B18;
+  --red-dark: #5C0710;
+  --card: #0E0E0F;
+  --tile: #151517;
+  --white: #FFFFFF;
+  --grey: #C9C9CC;
+  --grey-2: #8D8D93;
+  --line: #242427;
+  --round: "Baloo 2", "Arial Rounded MT Bold", "Segoe UI", system-ui, sans-serif;
+  --script: "Pacifico", "Segoe Script", "Brush Script MT", cursive;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--red); color: var(--white); font: 400 17px/1.6 var(--round); -webkit-font-smoothing: antialiased; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--white); outline-offset: 3px; }
+h1, h2, h3 { text-wrap: balance; }
+.nowrap { white-space: nowrap; }
+
+/* ---------- Cadre ---------- */
+.frame {
+  max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 64px minmax(0, 1fr);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 18px 32px;
+}
+.side { position: relative; }
+.side span {
+  position: sticky; top: 50vh; display: block; transform: translate(-6px, -50%) rotate(180deg);
+  writing-mode: vertical-rl; font: 800 34px/1 var(--round); letter-spacing: .06em; text-transform: uppercase;
+}
+.pages { display: grid; gap: 22px; min-width: 0; }
+.page { position: relative; overflow: hidden; background: var(--card); border-radius: 22px; padding: clamp(26px, 4.4vw, 60px); box-shadow: 0 30px 60px -36px rgba(0, 0, 0, .7); }
+.dot { position: absolute; border-radius: 50%; pointer-events: none; }
+.dot.r { background: var(--red); }
+.dot.d { background: var(--red-deep); }
+.dot.k { background: var(--red-dark); }
+
+/* ---------- En-tête ---------- */
+.top { position: relative; z-index: 3; display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap; }
+.brand { position: relative; display: inline-flex; align-items: center; text-decoration: none; padding: 4px 0 4px 6px; isolation: isolate; }
+.brand::before, .brand::after { content: ""; position: absolute; border-radius: 50%; z-index: -1; }
+.brand::before { width: 54px; height: 54px; left: -6px; top: 50%; translate: 0 -50%; background: var(--red); }
+.brand::after { width: 40px; height: 40px; left: 30px; top: 58%; background: var(--red-deep); }
+.brand b { font: 800 30px/1 var(--round); }
+.menu { display: flex; align-items: center; gap: clamp(18px, 3vw, 40px); flex-wrap: wrap; }
+.menu a { font: 700 16px/1 var(--round); text-decoration: none; }
+.menu a:not(.pill):hover { color: var(--red-hot); }
+.pill { display: inline-flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; font: 700 16px/1 var(--round); padding: 13px 26px; border-radius: 10px; background: var(--red); color: var(--white); box-shadow: 0 6px 0 var(--red-dark); transition: transform .2s ease, box-shadow .2s ease, background .2s ease; }
+.pill:hover { background: var(--red-hot); transform: translateY(-2px); box-shadow: 0 8px 0 var(--red-dark); }
+.pill:active { transform: translateY(3px); box-shadow: 0 2px 0 var(--red-dark); }
+.pill.ghost { background: transparent; box-shadow: inset 0 0 0 2px var(--red); }
+.pill.ghost:hover { background: var(--red); }
+
+/* ---------- Ouverture ---------- */
+.hero { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr); gap: 32px; align-items: center; padding-top: clamp(36px, 5.5vw, 72px); position: relative; z-index: 2; }
+.status { display: inline-flex; align-items: center; gap: 10px; padding: 8px 14px 8px 10px; border-radius: 999px; background: var(--tile); border: 1px solid var(--line); font: 600 14.5px/1.2 var(--round); color: var(--grey); }
+.status i { width: 10px; height: 10px; border-radius: 50%; background: #2BD46B; box-shadow: 0 0 0 4px rgba(43, 212, 107, .18); flex: none; }
+.hello { margin: 20px 0 0; font: 800 clamp(34px, 4.6vw, 56px)/1.1 var(--round); }
+.hello .name { font: 400 1.12em/1 var(--script); margin-left: .12em; display: inline-block; transform: translateY(.04em); }
+.role { margin: 10px 0 0; font: 800 clamp(44px, 6.4vw, 82px)/1 var(--round); color: var(--red); letter-spacing: -.01em; }
+.study { margin: 16px 0 0; font: 700 clamp(17px, 1.6vw, 20px)/1.4 var(--round); }
+.study span { color: var(--red-hot); }
+.builds { margin: 18px 0 0; font: 500 18px/1.5 var(--round); color: var(--grey); min-height: 1.5em; }
+.builds b { color: var(--white); font-weight: 700; border-bottom: 3px solid var(--red); }
+.find { margin: 26px 0 0; font: 600 17px/1 var(--round); }
+.socials { display: flex; gap: 14px; margin-top: 14px; }
+.socials a { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 12px; border: 1.5px solid var(--line); text-decoration: none; transition: border-color .2s ease, background .2s ease; }
+.socials a:hover { border-color: var(--red); background: var(--red-dark); }
+.socials svg { width: 22px; height: 22px; fill: var(--white); }
+.actions { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 32px; }
+.actions .pill { padding: 16px 34px; font-size: 18px; min-width: 160px; }
+
+/* logo RA et étiquettes qui flottent autour */
+.emblem { position: relative; justify-self: center; width: min(100%, 470px); aspect-ratio: 1; }
+.emblem svg { width: 100%; height: 100%; overflow: visible; }
+.tag-float { position: absolute; font: 700 14px/1 var(--round); padding: 9px 13px; border-radius: 10px; background: var(--white); color: #111; box-shadow: 0 10px 24px -10px rgba(0, 0, 0, .6); white-space: nowrap; }
+.tag-float.a { left: -2%; top: 20%; }
+.tag-float.b { right: -4%; top: 58%; background: var(--red-dark); color: var(--white); }
+.tag-float.c { left: 8%; bottom: 6%; background: var(--tile); color: var(--white); border: 1px solid var(--line); }
+@media (prefers-reduced-motion: no-preference) {
+  .emblem .spin { transform-origin: 250px 250px; animation: spin 40s linear infinite; }
+  .emblem .float { animation: float 7s ease-in-out infinite alternate; }
+  .tag-float { animation: bob 5s ease-in-out infinite alternate; }
+  .tag-float.b { animation-delay: -1.6s; }
+  .tag-float.c { animation-delay: -3.2s; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes float { to { transform: translateY(-10px); } }
+  @keyframes bob { to { transform: translateY(-12px); } }
+}
+
+/* ---------- Bande rouge des outils ---------- */
+.band { overflow: hidden; border-radius: 16px; background: var(--white); color: var(--red); padding: 16px 0; }
+.band .track { display: flex; width: max-content; gap: 34px; font: 800 22px/1 var(--round); text-transform: uppercase; letter-spacing: .04em; }
+.band .track span { display: inline-flex; align-items: center; gap: 34px; }
+.band .track span::after { content: ""; width: 12px; height: 12px; border-radius: 50%; background: var(--red); }
+@media (prefers-reduced-motion: no-preference) {
+  .band .track { animation: slide 32s linear infinite; }
+  @keyframes slide { to { transform: translateX(-50%); } }
+}
+
+/* ---------- Titres de page ---------- */
+.kicker { margin: 0; font: 700 15px/1 var(--round); color: var(--red); letter-spacing: .14em; text-transform: uppercase; }
+.title { margin: 10px 0 0; font: 800 clamp(34px, 4.8vw, 60px)/1.08 var(--round); }
+.title em { font: 400 .92em/1 var(--script); color: var(--red); font-style: normal; }
+.intro { margin: 14px 0 0; max-width: 62ch; color: var(--grey); }
+.head { position: relative; z-index: 2; margin-bottom: 34px; }
+
+/* ---------- À propos : trois cartes ---------- */
+.trio { position: relative; z-index: 2; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.card3 { background: var(--tile); border: 1px solid var(--line); border-radius: 18px; padding: 24px 22px; display: flex; flex-direction: column; gap: 10px; transition: transform .25s ease, border-color .25s ease; }
+.card3:hover { transform: translateY(-4px); border-color: var(--red); }
+.card3 .ic { width: 52px; height: 52px; border-radius: 50%; background: var(--red); display: grid; place-items: center; box-shadow: 10px 6px 0 -2px var(--red-dark); }
+.card3 .ic svg, .skill .ic svg { width: 26px; height: 26px; stroke: var(--white); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.card3 small { font: 700 13px/1 var(--round); letter-spacing: .1em; text-transform: uppercase; color: var(--red-hot); margin-top: 6px; }
+.card3 h3 { margin: 0; font: 800 22px/1.2 var(--round); }
+.card3 p { margin: 0; color: var(--grey); font-size: 15.5px; line-height: 1.55; }
+
+/* ---------- Parcours ---------- */
+.path { position: relative; z-index: 2; list-style: none; margin: 34px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; }
+.path li { position: relative; padding: 34px 18px 0 0; }
+.path li::before { content: ""; position: absolute; left: 0; right: 0; top: 9px; height: 3px; background: var(--line); }
+.path li:first-child::before { left: 10px; }
+.path li::after { content: ""; position: absolute; left: 0; top: 0; width: 21px; height: 21px; border-radius: 50%; background: var(--card); border: 4px solid var(--red); }
+.path li.now::after { background: var(--red); box-shadow: 0 0 0 6px rgba(227, 0, 27, .25); }
+.path b { display: block; font: 800 19px/1.25 var(--round); }
+.path span { display: block; margin-top: 4px; color: var(--grey); font-size: 15px; line-height: 1.5; }
+.path em { display: inline-block; margin-bottom: 6px; font: 700 12.5px/1 var(--round); font-style: normal; letter-spacing: .1em; text-transform: uppercase; color: var(--red-hot); }
+
+/* ---------- Compétences ---------- */
+.skills { position: relative; z-index: 2; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.skill { background: var(--tile); border: 1px solid var(--line); border-radius: 18px; padding: 22px 20px 24px; display: flex; flex-direction: column; gap: 10px; }
+.skill .ic { width: 46px; height: 46px; border-radius: 12px; background: var(--red-dark); display: grid; place-items: center; }
+.skill h3 { margin: 4px 0 0; font: 800 20px/1.2 var(--round); }
+.skill p { margin: 0; color: var(--grey); font-size: 15px; line-height: 1.5; }
+.skill .tags { margin-top: auto; }
+
+/* ---------- Projets ---------- */
+.filters { position: relative; z-index: 2; display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 26px; }
+.chip { cursor: pointer; font: 700 15px/1 var(--round); padding: 11px 18px; border-radius: 999px; border: 1.5px solid var(--line); background: transparent; color: var(--white); transition: background .2s ease, border-color .2s ease; }
+.chip:hover { border-color: var(--red); }
+.chip[aria-pressed="true"] { background: var(--red); border-color: var(--red); }
+.chip .c { opacity: .7; margin-left: 6px; }
+.projects { position: relative; z-index: 2; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.proj { position: relative; overflow: hidden; background: #141416; border: 1px solid var(--line); border-radius: 20px; padding: 24px 22px 22px; display: flex; flex-direction: column; gap: 12px; transition: transform .25s ease, border-color .25s ease; }
+.proj > * { position: relative; z-index: 1; }
+.proj:hover { transform: translateY(-4px); border-color: var(--red); }
+.proj::before { content: ""; position: absolute; width: 120px; height: 120px; right: -42px; top: -42px; border-radius: 50%; background: var(--red-dark); opacity: .7; }
+.proj.star { grid-column: span 3; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 14px 36px; padding: 30px 30px 28px; background: linear-gradient(135deg, #1C0307 0%, #141416 62%); }
+.proj.star::before { width: 260px; height: 260px; right: -80px; top: -110px; background: var(--red-deep); opacity: .5; }
+.proj.star .text { display: flex; flex-direction: column; gap: 12px; }
+.proj .meta { display: flex; justify-content: space-between; gap: 10px; font: 700 13px/1.2 var(--round); letter-spacing: .1em; text-transform: uppercase; color: var(--red-hot); }
+.proj .meta span:last-child { color: var(--grey-2); }
+.proj h3 { margin: 4px 0 0; font: 800 clamp(22px, 2.4vw, 30px)/1.15 var(--round); }
+.proj p { margin: 0; color: var(--grey); font-size: 15.5px; line-height: 1.55; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; padding-top: 6px; }
+.tags span { font: 600 12.5px/1 var(--round); padding: 7px 10px; border-radius: 8px; background: #1E1E21; color: var(--grey); }
+
+/* parcours d'une commande ou d'un paiement, étape par étape */
+.flow { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; align-content: center; counter-reset: f; }
+.flow li { counter-increment: f; display: grid; grid-template-columns: 38px minmax(0, 1fr); gap: 12px; align-items: center; background: rgba(0, 0, 0, .35); border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; }
+.flow li::before { content: counter(f); width: 38px; height: 38px; border-radius: 50%; background: var(--red); display: grid; place-items: center; font: 800 17px/1 var(--round); }
+.flow li:last-child::before { content: "✓"; background: #1E8F4C; }
+.flow b { display: block; font: 800 16px/1.2 var(--round); }
+.flow span { display: block; font-size: 14px; color: var(--grey); line-height: 1.4; }
+
+/* les trois entités de Nateivapay */
+.three { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; align-content: center; text-align: center; }
+.three div { background: rgba(0, 0, 0, .35); border: 1px solid var(--line); border-radius: 14px; padding: 18px 10px 16px; }
+.three i { display: grid; place-items: center; width: 48px; height: 48px; margin: 0 auto 10px; border-radius: 50%; background: var(--red); font: 800 20px/1 var(--round); font-style: normal; }
+.three b { display: block; font: 800 15.5px/1.2 var(--round); }
+.three span { display: block; margin-top: 4px; font-size: 13px; color: var(--grey); line-height: 1.35; }
+.three .lock { grid-column: 1 / -1; display: flex; align-items: center; justify-content: center; gap: 10px; padding: 12px; font: 700 14.5px/1.3 var(--round); color: var(--white); background: var(--red-dark); border-color: var(--red-deep); }
+
+/* ---------- Façon de travailler ---------- */
+.steps { position: relative; z-index: 2; list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+.steps li { background: var(--tile); border: 1px solid var(--line); border-radius: 16px; padding: 20px 18px; }
+.steps .n { width: 40px; height: 40px; border-radius: 50%; background: var(--red); display: grid; place-items: center; font: 800 18px/1 var(--round); }
+.steps h3 { margin: 14px 0 6px; font: 800 19px/1.2 var(--round); }
+.steps p { margin: 0; font-size: 14.5px; color: var(--grey); line-height: 1.5; }
+
+/* ---------- Contact ---------- */
+.contact { text-align: center; padding-block: clamp(48px, 7vw, 88px); }
+.contact .title { margin-inline: auto; max-width: 18ch; }
+.contact .intro { margin-inline: auto; }
+.contact .actions { justify-content: center; }
+.ways { position: relative; z-index: 2; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin: 34px auto 0; max-width: 760px; text-align: left; }
+.way { display: grid; grid-template-columns: 46px minmax(0, 1fr); column-gap: 12px; align-items: center; padding: 16px; border-radius: 16px; background: var(--tile); border: 1px solid var(--line); text-decoration: none; transition: transform .2s ease, border-color .2s ease; }
+.way:hover { transform: translateY(-3px); border-color: var(--red); }
+.way .ic { grid-row: span 2; width: 46px; height: 46px; border-radius: 50%; background: var(--red); display: grid; place-items: center; }
+.way .ic svg { width: 22px; height: 22px; stroke: var(--white); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.way small { font: 700 12.5px/1.2 var(--round); letter-spacing: .1em; text-transform: uppercase; color: var(--red-hot); }
+.way b { font: 700 15.5px/1.3 var(--round); overflow-wrap: anywhere; }
+
+@media (max-width: 620px) { .ways { grid-template-columns: minmax(0, 1fr); } }
+.where { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; gap: 24px; background: var(--white); color: #141414; border-radius: 22px; padding: 22px clamp(20px, 4vw, 44px); }
+.where .org { display: flex; align-items: center; gap: 18px; min-width: 0; }
+.where img { width: 84px; height: 84px; object-fit: contain; flex: none; }
+.where small { display: block; font: 700 12.5px/1.2 var(--round); letter-spacing: .12em; text-transform: uppercase; color: var(--red); }
+.where b { display: block; margin-top: 4px; font: 800 21px/1.2 var(--round); }
+.where span { display: block; margin-top: 2px; font-size: 15px; color: #55555B; line-height: 1.4; }
+.where .sep { width: 2px; align-self: stretch; background: #E6E6E9; border-radius: 2px; margin: 0; }
+@media (max-width: 760px) {
+  .where { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+  .where .sep { width: auto; height: 2px; }
+  .where img { width: 64px; height: 64px; }
+}
+footer { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 4px 6px 0; font: 700 14px/1.6 var(--round); }
+
+/* ---------- Apparition au défilement (seulement si le script tourne) ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .js .reveal { opacity: 0; transform: translateY(26px); transition: opacity .7s ease, transform .7s ease; }
+  .js .reveal.in { opacity: 1; transform: none; }
+}
+
+/* ---------- Petits écrans ---------- */
+@media (max-width: 1080px) {
+  .skills, .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .projects { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .proj.star { grid-column: span 2; }
+  .path { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 26px; }
+}
+@media (max-width: 860px) {
+  .frame { grid-template-columns: minmax(0, 1fr); }
+  .side { display: none; }
+  .hero { grid-template-columns: minmax(0, 1fr); }
+  .emblem { width: min(100%, 360px); order: -1; }
+  .menu a:not(.pill) { display: none; }
+  .trio { grid-template-columns: minmax(0, 1fr); }
+  .proj.star { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 620px) {
+  .page { border-radius: 18px; }
+  .skills, .projects, .steps { grid-template-columns: minmax(0, 1fr); }
+  .proj.star { grid-column: auto; padding: 24px 20px; }
+  .path { grid-template-columns: minmax(0, 1fr); }
+  .path li { padding: 0 0 0 38px; }
+  .path li::before { left: 9px; right: auto; top: 0; bottom: -26px; width: 3px; height: auto; }
+  .path li:first-child::before { left: 9px; top: 10px; }
+  .path li:last-child::before { bottom: auto; height: 10px; }
+  .actions .pill { flex: 1 1 140px; min-width: 0; }
+  .tag-float { font-size: 12.5px; padding: 7px 10px; }
+  .three { grid-template-columns: minmax(0, 1fr); text-align: left; }
+  .three div { display: grid; grid-template-columns: 44px minmax(0, 1fr); column-gap: 12px; align-items: center; padding: 12px 14px; }
+  .three i { grid-row: span 2; width: 44px; height: 44px; margin: 0; }
+  .three span { margin-top: 2px; }
+  .three .lock { display: flex; }
+  .band .track { font-size: 18px; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .pill, .card3, .proj { transition: none; } }
+</style>
+</head>
+<body>
+
+<div class="frame">
+  <div class="side" aria-hidden="true"><span>Portfolio</span></div>
+
+  <main class="pages">
+
+    <!-- Accueil -->
+    <section class="page" id="accueil" aria-labelledby="t-accueil">
+      <span class="dot k" style="width: 180px; height: 180px; left: -70px; bottom: -70px"></span>
+      <span class="dot d" style="width: 70px; height: 70px; left: 44%; top: 22%; opacity: .7"></span>
+      <span class="dot k" style="width: 36px; height: 36px; left: 52%; top: 9%"></span>
+
+      <header class="top">
+        <a class="brand" href="#accueil" aria-label="Richard Atangana, accueil"><b>Richard</b></a>
+        <nav class="menu" aria-label="Menu principal">
+          <a href="#apropos">À propos</a>
+          <a href="#competences">Compétences</a>
+          <a href="#projets">Projets</a>
+          <a class="pill" href="#contact">Contact</a>
+        </nav>
+      </header>
+
+      <div class="hero">
+        <div>
+          <span class="status"><i aria-hidden="true"></i>Étudiant en Licence 2 · Développeur chez Nateiva</span>
+          <h1 class="hello" id="t-accueil">Salut, je suis <span class="name">Richard</span></h1>
+          <p class="role">Développeur <span class="nowrap">Full&#8209;Stack</span></p>
+          <p class="study">Licence 2 Informatique · <span>option Génie logiciel</span> · Université de Yaoundé</p>
+          <p class="builds" aria-live="polite">Je développe <b id="mot">des plateformes de paiement</b></p>
+          <p class="find">Retrouvez-moi sur</p>
+          <div class="socials">
+            <a href="https://github.com/Richard-983" target="_blank" rel="noopener" aria-label="GitHub de Richard Atangana">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.710 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.28-5.25-5.690 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.4-5.27 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg>
+            </a>
+            <a href="mailto:wassiaiman@gmail.com" aria-label="Écrire un email à Richard Atangana">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Zm1 2.2V17h16V7.2l-8 5.3-8-5.3ZM5.4 7l6.6 4.4L18.6 7H5.4Z"/></svg>
+            </a>
+            <a href="tel:+237678145736" aria-label="Appeler Richard Atangana au 678 14 57 36">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.2 15.2 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.6a1 1 0 0 1-.25 1l-2.2 2.2Z"/></svg>
+            </a>
+          </div>
+          <div class="actions">
+            <a class="pill" href="#projets">Voir mes projets</a>
+            <a class="pill ghost" href="#contact">Me contacter</a>
+          </div>
+        </div>
+
+        <div class="emblem" aria-hidden="true">
+          <svg viewBox="0 0 500 500">
+            <defs>
+              <radialGradient id="ra-fond" cx="38%" cy="32%" r="75%">
+                <stop offset="0" stop-color="#FF2A40"/>
+                <stop offset=".55" stop-color="#E3001B"/>
+                <stop offset="1" stop-color="#A50715"/>
+              </radialGradient>
+            </defs>
+            <circle cx="400" cy="92" r="64" fill="#9B0B18"/>
+            <circle cx="92" cy="400" r="26" fill="#5C0710"/>
+            <circle cx="438" cy="330" r="18" fill="#5C0710"/>
+            <g class="spin">
+              <circle cx="250" cy="250" r="232" fill="none" stroke="#9B0B18" stroke-width="2" stroke-dasharray="4 14"/>
+              <circle cx="250" cy="18" r="9" fill="#FFFFFF"/>
+            </g>
+            <g class="float">
+              <circle cx="250" cy="250" r="196" fill="url(#ra-fond)"/>
+              <circle cx="250" cy="250" r="160" fill="none" stroke="#FFFFFF" stroke-opacity=".28" stroke-width="2"/>
+              <!-- monogramme RA : la jambe du R devient la diagonale du A -->
+              <g fill="none" stroke="#FFFFFF" stroke-width="26" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M150 330 V170 H205 a42 42 0 0 1 0 84 H150"/>
+                <path d="M190 254 L262 330"/>
+                <path d="M262 330 L312 170 L362 330"/>
+                <path d="M286 270 H338"/>
+              </g>
+              <text x="250" y="384" text-anchor="middle" fill="#FFFFFF" font-family="Baloo 2, Arial Rounded MT Bold, sans-serif" font-weight="700" font-size="22" letter-spacing="6">ATANGANA</text>
+            </g>
+          </svg>
+          <span class="tag-float a">&lt;/&gt; JavaScript</span>
+          <span class="tag-float b">Node.js · React</span>
+          <span class="tag-float c">Python</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bande des outils -->
+    <div class="band" aria-label="Outils que j'utilise">
+      <div class="track">
+        <span>JavaScript</span><span>Node.js</span><span>Express</span><span>React</span><span>HTML · CSS</span><span>SQLite</span><span>Python</span><span>Git · GitHub</span><span>Mobile Money</span>
+        <span aria-hidden="true">JavaScript</span><span aria-hidden="true">Node.js</span><span aria-hidden="true">Express</span><span aria-hidden="true">React</span><span aria-hidden="true">HTML · CSS</span><span aria-hidden="true">SQLite</span><span aria-hidden="true">Python</span><span aria-hidden="true">Git · GitHub</span><span aria-hidden="true">Mobile Money</span>
+      </div>
+    </div>
+
+    <!-- À propos -->
+    <section class="page" id="apropos" aria-labelledby="t-apropos">
+      <span class="dot d" style="width: 140px; height: 140px; right: -50px; top: -50px"></span>
+      <span class="dot k" style="width: 60px; height: 60px; right: 90px; top: 60px"></span>
+      <div class="head reveal">
+        <p class="kicker">À propos</p>
+        <h2 class="title" id="t-apropos">Étudiant le jour, <em>développeur</em> sur de vrais projets</h2>
+        <p class="intro">Je suis en deuxième année de licence en informatique, option génie logiciel, à l'Université de Yaoundé. À côté des cours, je développe chez Nateiva les projets que mon responsable me confie, et je continue d'apprendre avec mes propres recherches.</p>
+      </div>
+
+      <div class="trio">
+        <article class="card3 reveal">
+          <span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c3 2 9 2 12 0v-5"/></svg></span>
+          <small>Formation</small>
+          <h3>Licence 2 · Génie logiciel</h3>
+          <p>Filière informatique à l'Université de Yaoundé : algorithmique, programmation, bases de données, conception de logiciels.</p>
+        </article>
+        <article class="card3 reveal">
+          <span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></span>
+          <small>Expérience</small>
+          <h3>Développeur chez Nateiva</h3>
+          <p>Je réalise les projets que le responsable m'assigne : plateformes de paiement, application de livraison, sites web. Des projets utilisés pour de vrai, pas seulement des exercices.</p>
+        </article>
+        <article class="card3 reveal">
+          <span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg></span>
+          <small>En plus</small>
+          <h3>Recherches personnelles</h3>
+          <p>Je teste de nouveaux outils et je construis de petits projets pour progresser : génération de documents, vidéos animées en code, sites.</p>
+        </article>
+      </div>
+
+      <ol class="path reveal" aria-label="Mon parcours">
+        <li><em>Université</em><b>Licence 1 Informatique</b><span>Les bases : algorithmique et programmation.</span></li>
+        <li><em>Nateiva</em><b>Premiers projets</b><span>Nateivapay et NateivaSMS.</span></li>
+        <li><em>Nateiva</em><b>Nateiva Gaz</b><span>Livraison de gaz et paiement sécurisé.</span></li>
+        <li class="now"><em>Aujourd'hui</em><b>Licence 2 · Génie logiciel</b><span>Les cours, Nateiva et mes projets en parallèle.</span></li>
+      </ol>
+    </section>
+
+    <!-- Compétences -->
+    <section class="page" id="competences" aria-labelledby="t-competences">
+      <span class="dot k" style="width: 120px; height: 120px; left: -40px; top: -40px"></span>
+      <div class="head reveal">
+        <p class="kicker">Compétences</p>
+        <h2 class="title" id="t-competences">Ce que je <em>sais faire</em></h2>
+      </div>
+      <div class="skills">
+        <article class="skill reveal">
+          <span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M3 9h18M8 4v5"/></svg></span>
+          <h3>Front-end</h3>
+          <p>Des interfaces claires, adaptées au téléphone, en français et en anglais.</p>
+          <div class="tags"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>React</span></div>
+        </article>
+        <article class="skill reveal">
+          <span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="7" rx="2"/><rect x="3" y="14" width="18" height="7" rx="2"/><path d="M7 6.5h.01M7 17.5h.01"/></svg></span>
+          <h3>Back-end</h3>
+          <p>Des serveurs et des API, des bases de données, des comptes utilisateurs.</p>
+          <div class="tags"><span>Node.js</span><span>Express</span><span>SQLite</span></div>
+        </article>
+        <article class="skill reveal">
+          <span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="3"/><path d="M2 10h20M6 15h4"/></svg></span>
+          <h3>Paiements en ligne</h3>
+          <p>MTN MoMo et Orange Money via NotchPay, en mode test, avec partage du montant entre plusieurs comptes.</p>
+          <div class="tags"><span>NotchPay</span><span>Mobile Money</span></div>
+        </article>
+        <article class="skill reveal">
+          <span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 9-4 3 4 3M16 9l4 3-4 3M13 6l-2 12"/></svg></span>
+          <h3>Outils et méthode</h3>
+          <p>Scripts Python, tests automatiques, Git et GitHub, documentation du projet.</p>
+          <div class="tags"><span>Python</span><span>Jest</span><span>Git</span></div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Projets -->
+    <section class="page" id="projets" aria-labelledby="t-projets">
+      <span class="dot d" style="width: 200px; height: 200px; right: -80px; bottom: -80px; opacity: .6"></span>
+      <div class="head reveal">
+        <p class="kicker">Projets</p>
+        <h2 class="title" id="t-projets">Mes <em>réalisations</em></h2>
+        <p class="intro">La plupart ont été réalisés chez Nateiva, à la demande de mon responsable. Les deux premiers sont ceux dont je suis le plus fier.</p>
+      </div>
+      <div class="filters reveal" role="group" aria-label="Filtrer les projets">
+        <button class="chip" type="button" data-f="tout" aria-pressed="true">Tous<span class="c">10</span></button>
+        <button class="chip" type="button" data-f="app" aria-pressed="false">Applications<span class="c">3</span></button>
+        <button class="chip" type="button" data-f="web" aria-pressed="false">Sites web<span class="c">5</span></button>
+        <button class="chip" type="button" data-f="perso" aria-pressed="false">Outils et vidéo<span class="c">2</span></button>
+      </div>
+
+      <div class="projects">
+        <article class="proj star reveal" data-cat="app">
+          <div class="text">
+            <div class="meta"><span>Nateiva · Application de livraison</span><span>2026</span></div>
+            <h3>Nateiva Gaz</h3>
+            <p>Une application de livraison de gaz à domicile. Le ménage passe sa commande, le dépôt la reçoit, un livreur accepte la livraison. Le paiement est sécurisé : l'argent reste bloqué jusqu'à la livraison, puis chacun reçoit sa part sur son compte.</p>
+            <div class="tags"><span>Node.js</span><span>Express</span><span>SQLite</span><span>NotchPay</span><span>Temps réel</span></div>
+          </div>
+          <ol class="flow" aria-label="Le parcours d'une commande">
+            <li><div><b>Le ménage commande</b><span>il choisit sa bouteille et paie en Mobile Money</span></div></li>
+            <li><div><b>Le dépôt reçoit la commande</b><span>il prépare la bouteille</span></div></li>
+            <li><div><b>Le livreur accepte</b><span>il récupère et livre à domicile</span></div></li>
+            <li><div><b>Chacun reçoit sa part</b><span>dépôt, livreur et Nateiva, une fois la bouteille livrée</span></div></li>
+          </ol>
+        </article>
+
+        <article class="proj star reveal" data-cat="app">
+          <div class="text">
+            <div class="meta"><span>Nateiva · Paiement en ligne</span><span>2026</span></div>
+            <h3>Nateivapay</h3>
+            <p>Une plateforme de paiement en ligne sécurisée, où trois entités effectuent leurs transactions en toute sécurité. Chaque paiement est enregistré et réparti entre les parties, sans risque de payer deux fois.</p>
+            <div class="tags"><span>NotchPay</span><span>Node.js</span><span>React</span><span>Mobile Money</span></div>
+          </div>
+          <div class="three" aria-label="Les trois entités">
+            <div><i>1</i><b>Entité 1</b><span>paie en ligne</span></div>
+            <div><i>2</i><b>Entité 2</b><span>reçoit sa part</span></div>
+            <div><i>3</i><b>Entité 3</b><span>reçoit sa part</span></div>
+            <div class="lock">🔒 Transactions sécurisées et tracées</div>
+          </div>
+        </article>
+
+        <article class="proj reveal" data-cat="app">
+          <div class="meta"><span>Nateiva · Messagerie</span><span>2026</span></div>
+          <h3>NateivaSMS</h3>
+          <p>L'envoi de SMS pour les applications Nateiva : codes de vérification et alertes.</p>
+          <div class="tags"><span>SMS</span><span>Node.js</span></div>
+        </article>
+
+        <article class="proj reveal" data-cat="perso">
+          <div class="meta"><span>Outil · École</span><span>2026</span></div>
+          <h3>Horizon</h3>
+          <p>Un générateur de fiches de classe pour l'école primaire, du SIL au CM2 : six séquences par an, un code et un QR code par fiche pour la lecture automatique.</p>
+          <div class="tags"><span>Python</span><span>QR code</span><span>Word</span></div>
+        </article>
+
+        <article class="proj reveal" data-cat="web">
+          <div class="meta"><span>Nateiva · Site web</span><span>2026</span></div>
+          <h3>Nateiva</h3>
+          <p>Le site de présentation de l'entreprise et de ses produits, en français et en anglais.</p>
+          <div class="tags"><span>FR · EN</span><span>HTML</span><span>JavaScript</span></div>
+        </article>
+
+        <article class="proj reveal" data-cat="web">
+          <div class="meta"><span>Nateiva · Site d'université</span><span>2026</span></div>
+          <h3>Nateiva New University</h3>
+          <p>Un site d'université avec préinscription en ligne et un espace d'administration.</p>
+          <div class="tags"><span>Node.js</span><span>SQLite</span></div>
+        </article>
+
+        <article class="proj reveal" data-cat="web">
+          <div class="meta"><span>Nateiva · Site d'université</span><span>2026</span></div>
+          <h3>New Vision International Nateiva University</h3>
+          <p>Un site d'université bilingue : programmes, admissions et préinscription.</p>
+          <div class="tags"><span>FR · EN</span><span>Node.js</span></div>
+        </article>
+
+        <article class="proj reveal" data-cat="web">
+          <div class="meta"><span>Nateiva · Boutique</span><span>2026</span></div>
+          <h3>Penja Origine</h3>
+          <p>Une boutique en ligne de produits du terroir camerounais, avec panier.</p>
+          <div class="tags"><span>E-commerce</span><span>JavaScript</span></div>
+        </article>
+
+        <article class="proj reveal" data-cat="web">
+          <div class="meta"><span>Nateiva · Boutique</span><span>2026</span></div>
+          <h3>Soleya</h3>
+          <p>Une boutique de kits solaires, avec un petit calculateur de besoins en énergie.</p>
+          <div class="tags"><span>Calculateur</span><span>JavaScript</span></div>
+        </article>
+
+        <article class="proj reveal" data-cat="perso">
+          <div class="meta"><span>Vidéo · Motion design</span><span>2026</span></div>
+          <h3>EliteStream</h3>
+          <p>Des vidéos animées écrites en code avec Remotion, et une participation au site de vente.</p>
+          <div class="tags"><span>Remotion</span><span>React</span><span>PHP</span></div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Façon de travailler -->
+    <section class="page" id="methode" aria-labelledby="t-methode">
+      <span class="dot k" style="width: 90px; height: 90px; right: 6%; top: -30px"></span>
+      <div class="head reveal">
+        <p class="kicker">Ma façon de travailler</p>
+        <h2 class="title" id="t-methode">Comprendre avant de <em>coder</em></h2>
+      </div>
+      <ol class="steps">
+        <li class="reveal"><div class="n">1</div><h3>Comprendre</h3><p>Lire la demande, poser les questions, lister les écrans.</p></li>
+        <li class="reveal"><div class="n">2</div><h3>Dessiner</h3><p>Faire les maquettes et les valider avant d'écrire le code.</p></li>
+        <li class="reveal"><div class="n">3</div><h3>Développer</h3><p>Construire, tester, surtout tout ce qui touche à l'argent.</p></li>
+        <li class="reveal"><div class="n">4</div><h3>Présenter</h3><p>Faire la démonstration, documenter et pousser le code sur GitHub.</p></li>
+      </ol>
+    </section>
+
+    <!-- Contact -->
+    <section class="page contact" id="contact" aria-labelledby="t-contact">
+      <span class="dot r" style="width: 220px; height: 220px; left: -90px; top: -90px; opacity: .9"></span>
+      <span class="dot d" style="width: 110px; height: 110px; right: -30px; bottom: -30px"></span>
+      <span class="dot k" style="width: 46px; height: 46px; right: 16%; top: 18%"></span>
+      <div class="head reveal" style="margin-bottom: 0">
+        <p class="kicker">Contact</p>
+        <h2 class="title" id="t-contact">Parlons de votre <em>projet</em></h2>
+        <p class="intro">Un stage, une collaboration, une question sur un de mes projets : écrivez-moi ou appelez-moi.</p>
+        <div class="ways">
+          <a class="way" href="mailto:wassiaiman@gmail.com">
+            <span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span>
+            <small>Email</small><b>wassiaiman@gmail.com</b>
+          </a>
+          <a class="way" href="tel:+237678145736">
+            <span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M10 18h4"/></svg></span>
+            <small>Téléphone</small><b>+237 678 14 57 36</b>
+          </a>
+          <a class="way" href="tel:+237698572645">
+            <span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M10 18h4"/></svg></span>
+            <small>Téléphone</small><b>+237 698 57 26 45</b>
+          </a>
+          <a class="way" href="https://github.com/Richard-983" target="_blank" rel="noopener">
+            <span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 9-4 3 4 3M16 9l4 3-4 3M13 6l-2 12"/></svg></span>
+            <small>GitHub</small><b>Richard-983</b>
+          </a>
+        </div>
+        <div class="actions">
+          <a class="pill" href="mailto:wassiaiman@gmail.com">M'écrire</a>
+          <a class="pill ghost" href="tel:+237678145736">M'appeler</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="where" aria-label="Mon université et mon entreprise">
+      <div class="org">
+        <img src="logo-universite-yaounde.png" alt="Logo de l'Université de Yaoundé" width="451" height="568">
+        <div><small>J'étudie à</small><b>Université de Yaoundé</b><span>Licence 2 Informatique · option Génie logiciel</span></div>
+      </div>
+      <span class="sep" aria-hidden="true"></span>
+      <div class="org">
+        <img src="logo-nateiva.png" alt="Logo de Nateiva" width="256" height="252">
+        <div><small>Je travaille chez</small><b>Nateiva</b><span>Développeur full-stack</span></div>
+      </div>
+    </section>
+
+    <footer>
+      <span>© 2026 Richard Atangana</span>
+      <span>Développeur full-stack · Étudiant en génie logiciel · Yaoundé</span>
+    </footer>
+  </main>
+</div>
+
+<script>
+document.documentElement.classList.add('js');
+
+// Filtres des projets
+var puces = document.querySelectorAll('.chip');
+var projets = document.querySelectorAll('.proj');
+puces.forEach(function (p) {
+  p.addEventListener('click', function () {
+    var f = p.getAttribute('data-f');
+    puces.forEach(function (q) { q.setAttribute('aria-pressed', String(q === p)); });
+    projets.forEach(function (c) { c.hidden = f !== 'tout' && c.getAttribute('data-cat') !== f; });
+  });
+});
+
+// Ce que je développe : le mot change toutes les 2,6 s
+var calme = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+var mots = ['des plateformes de paiement', 'des applications de livraison', 'des sites web', 'des outils pour les écoles'];
+var cible = document.getElementById('mot');
+if (!calme && cible) {
+  var i = 0;
+  setInterval(function () { i = (i + 1) % mots.length; cible.textContent = mots[i]; }, 2600);
+}
+
+// Apparition des blocs au défilement
+var blocs = document.querySelectorAll('.reveal');
+if ('IntersectionObserver' in window && !calme) {
+  var vue = new IntersectionObserver(function (entrees) {
+    entrees.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); vue.unobserve(e.target); } });
+  }, { rootMargin: '0px 0px -8% 0px' });
+  blocs.forEach(function (b) { vue.observe(b); });
+  // filet de sécurité : tout s'affiche après 4 s, même si l'observateur ne se déclenche pas
+  setTimeout(function () { blocs.forEach(function (b) { b.classList.add('in'); }); }, 4000);
+} else {
+  blocs.forEach(function (b) { b.classList.add('in'); });
+}
+</script>
+</body>
+</html>
